@@ -1,6 +1,9 @@
 package net.nick.tutorialmod.item;
 
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -8,6 +11,8 @@ import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.item.custom.ChiselItem;
 import net.nick.tutorialmod.item.custom.FuelItem;
+
+import java.util.List;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = // Teling minecraft that we want to register this as an item
@@ -24,7 +29,14 @@ public class ModItems {
 
     // Foods
     public static final RegistryObject<Item> KOHLRABI = ITEMS.register("kohlrabi",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.KOHLRABI)));
+            () -> new Item(new Item.Properties().food(ModFoodProperties.KOHLRABI)) {
+                @Override
+                public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+                    pTooltipComponents.add(Component.translatable("tooltip.tutorialmod.kohlrabi"));
+
+                    super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+                }
+            });
 
 
     // Custom Special Items
