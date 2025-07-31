@@ -20,8 +20,13 @@ public class ModCreativeModeTabs {
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(ModItems.ALEXANDRITE.get());
                         output.accept(ModItems.RAW_ALEXANDRITE.get());
+                        output.accept(ModItems.AURORA_ASHES.get());
 
+                        // Special
                         output.accept(ModItems.CHISEL.get());
+
+                        // Food
+                        output.accept(ModItems.KOHLRABI.get());
 
                     }).build());
 
@@ -35,6 +40,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.ALEXANDRITE_ORE.get());
                         output.accept(ModBlocks.ALEXANDRITE_DEEPSLATE_ORE.get());
 
+                        // Special
                         output.accept(ModBlocks.MAGIC_BLOCK.get());
 
                     }).build());

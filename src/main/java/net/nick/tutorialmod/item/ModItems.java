@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.item.custom.ChiselItem;
+import net.nick.tutorialmod.item.custom.FuelItem;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = // Teling minecraft that we want to register this as an item
@@ -18,6 +19,12 @@ public class ModItems {
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> RAW_ALEXANDRITE = ITEMS.register("raw_alexandrite",
             () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> AURORA_ASHES = ITEMS.register("aurora_ashes",
+            () -> new FuelItem(new Item.Properties(), 1200));
+
+    // Foods
+    public static final RegistryObject<Item> KOHLRABI = ITEMS.register("kohlrabi",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.KOHLRABI)));
 
 
     // Custom Special Items
