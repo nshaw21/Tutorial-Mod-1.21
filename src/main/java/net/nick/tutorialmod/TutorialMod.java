@@ -40,8 +40,6 @@ public class TutorialMod {
 
 
 
-
-
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
