@@ -7,9 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
-import net.nick.tutorialmod.item.custom.ChiselItem;
-import net.nick.tutorialmod.item.custom.FuelItem;
-import net.nick.tutorialmod.item.custom.ScorchedBladeItem;
+import net.nick.tutorialmod.item.custom.*;
 
 import java.util.List;
 
@@ -43,6 +41,10 @@ public class ModItems {
             () -> new ChiselItem(new Item.Properties().durability(32))); // Durability also means only 1 per stack
     public static final RegistryObject<Item> SCORCHED_BLADE = ITEMS.register("scorched_blade",
             () -> new ScorchedBladeItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem.createAttributes(Tiers.DIAMOND, 3, -2.4F)).durability(100)));
+    public static final RegistryObject<Item> ENDER_COMPASS = ITEMS.register("ender_compass",
+            () -> new EnderCompassItem(new Item.Properties()));
+    public static final RegistryObject<Item> TIME_FREEZING_CLOCK = ITEMS.register("time_freezing_clock",
+            () -> new TimeFreezingClockItem(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
