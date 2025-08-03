@@ -1,7 +1,6 @@
 package net.nick.tutorialmod;
 
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -16,8 +15,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.nick.tutorialmod.block.ModBlocks;
-import net.nick.tutorialmod.entity.ModEntities;
-import net.nick.tutorialmod.entity.client.ScorchedProjectileRenderer;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
 import net.nick.tutorialmod.item.ModItems;
 import org.slf4j.Logger;
@@ -40,8 +37,6 @@ public class TutorialMod {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
-
-        ModEntities.register(modEventBus);
 
 
 
@@ -82,7 +77,7 @@ public class TutorialMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-            EntityRenderers.register(ModEntities.SCORCHED_PROJECTILE.get(), ScorchedProjectileRenderer::new);
+
         }
     }
 }
