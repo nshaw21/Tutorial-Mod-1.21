@@ -32,6 +32,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.CHISEL.get());
         basicItem(ModItems.KOHLRABI.get());
         basicItem(ModItems.AURORA_ASHES.get());
+        basicItem(ModItems.RING_OF_FLIGHT.get());
+
+
         handheldItem(ModItems.SCORCHED_BLADE.get());
 
 

@@ -25,6 +25,7 @@ public class ModCreativeModeTabs {
                         // Special
                         output.accept(ModItems.CHISEL.get());
                         output.accept(ModItems.SCORCHED_BLADE.get());
+                        output.accept(ModItems.RING_OF_FLIGHT.get());
 
                         // Food
                         output.accept(ModItems.KOHLRABI.get());

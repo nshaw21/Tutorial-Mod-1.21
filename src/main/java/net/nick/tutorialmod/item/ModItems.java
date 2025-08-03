@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.item.custom.ChiselItem;
 import net.nick.tutorialmod.item.custom.FuelItem;
+import net.nick.tutorialmod.item.custom.RingOfFlightItem;
 import net.nick.tutorialmod.item.custom.ScorchedBladeItem;
 
 import java.util.List;
@@ -43,6 +44,8 @@ public class ModItems {
             () -> new ChiselItem(new Item.Properties().durability(32))); // Durability also means only 1 per stack
     public static final RegistryObject<Item> SCORCHED_BLADE = ITEMS.register("scorched_blade",
             () -> new ScorchedBladeItem(Tiers.DIAMOND, new Item.Properties().attributes(SwordItem.createAttributes(Tiers.DIAMOND, 3, -2.4F)).durability(100)));
+    public static final RegistryObject<Item> RING_OF_FLIGHT = ITEMS.register("ring_of_flight",
+            () -> new RingOfFlightItem(new Item.Properties()));
 
 
     public static void register(IEventBus eventBus) {
