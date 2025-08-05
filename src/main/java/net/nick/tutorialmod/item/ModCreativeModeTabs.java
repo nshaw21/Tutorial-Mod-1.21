@@ -45,6 +45,7 @@ public class ModCreativeModeTabs {
 
                         // Special
                         output.accept(ModBlocks.MAGIC_BLOCK.get());
+                        output.accept(ModBlocks.PEDESTAL.get());
 
                     }).build());
 

@@ -16,6 +16,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.nick.tutorialmod.block.ModBlocks;
+import net.nick.tutorialmod.block.entity.ModBlockEntities;
 import net.nick.tutorialmod.command.player.HomeCommand;
 import net.nick.tutorialmod.command.player.SetHomeCommand;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
@@ -41,7 +42,7 @@ public class TutorialMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
-
+        ModBlockEntities.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
