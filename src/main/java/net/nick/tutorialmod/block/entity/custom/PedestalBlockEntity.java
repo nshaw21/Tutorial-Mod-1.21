@@ -31,9 +31,19 @@ public class PedestalBlockEntity extends BlockEntity {
             }
         }
     };
+    private float rotation;
 
     public PedestalBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(ModBlockEntities.PEDESTAL_BE.get(), pPos, pBlockState);
+    }
+
+    // Makes the item in the inventory rotate
+    public float getRenderingRotation() {
+        rotation += 0.5f; // rotate it little by little every tick
+        if(rotation >= 360) { // Once it makes a full rotation,
+            rotation = 0; // restart it
+        }
+        return rotation;
     }
 
     // Clears the inventory

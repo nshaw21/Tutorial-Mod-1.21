@@ -3,6 +3,7 @@ package net.nick.tutorialmod;
 import com.mojang.logging.LogUtils;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.nick.tutorialmod.block.ModBlocks;
 import net.nick.tutorialmod.block.entity.ModBlockEntities;
+import net.nick.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
 import net.nick.tutorialmod.command.player.HomeCommand;
 import net.nick.tutorialmod.command.player.SetHomeCommand;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
@@ -82,6 +84,11 @@ public class TutorialMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public static void registerBER(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerBlockEntityRenderer(ModBlockEntities.PEDESTAL_BE.get(), PedestalBlockEntityRenderer::new);
         }
     }
 }
