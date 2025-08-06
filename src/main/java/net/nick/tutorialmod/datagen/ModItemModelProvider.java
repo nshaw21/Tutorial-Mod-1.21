@@ -5,6 +5,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.common.Mod;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.item.ModItems;
 
@@ -34,6 +35,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.AURORA_ASHES.get());
         basicItem(ModItems.ENDER_COMPASS.get());
         basicItem(ModItems.TIME_FREEZING_CLOCK.get());
+        basicItem(ModItems.POCKET_ANVIL.get());
+        basicItem(ModItems.SPELLBOOK.get());
 
         handheldItem(ModItems.SCORCHED_BLADE.get());
 

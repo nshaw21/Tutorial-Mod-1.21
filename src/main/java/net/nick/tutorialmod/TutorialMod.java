@@ -22,6 +22,7 @@ import net.nick.tutorialmod.block.entity.ModBlockEntities;
 import net.nick.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
 import net.nick.tutorialmod.command.player.HomeCommand;
 import net.nick.tutorialmod.command.player.SetHomeCommand;
+import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
 import net.nick.tutorialmod.item.ModItems;
 import net.nick.tutorialmod.screen.ModMenuTypes;
@@ -50,6 +51,7 @@ public class TutorialMod {
         ModBlockEntities.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
+        SpellbookDataComponents.register();
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);

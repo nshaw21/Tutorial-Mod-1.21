@@ -45,6 +45,10 @@ public class ModItems {
             () -> new EnderCompassItem(new Item.Properties()));
     public static final RegistryObject<Item> TIME_FREEZING_CLOCK = ITEMS.register("time_freezing_clock",
             () -> new TimeFreezingClockItem(new Item.Properties()));
+    public static final RegistryObject<Item> POCKET_ANVIL = ITEMS.register("pocket_anvil",
+            () -> new PocketAnvilItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SPELLBOOK = ITEMS.register("spellbook",
+            () -> new SpellbookItem(new Item.Properties().stacksTo(1)));
 
 
 

@@ -8,6 +8,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.screen.custom.PedestalMenu;
+import net.nick.tutorialmod.screen.custom.SpellbookMenu;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
@@ -15,6 +16,8 @@ public class ModMenuTypes {
 
     public static final RegistryObject<MenuType<PedestalMenu>> PEDESTAL_MENU =
             MENUS.register("pedestal_name", () -> IForgeMenuType.create(PedestalMenu::new));
+    public static final RegistryObject<MenuType<SpellbookMenu>> SPELLBOOK_MENU =
+            MENUS.register("spellbook_menu", () -> SpellbookMenu.TYPE);
 
 
 
