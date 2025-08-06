@@ -2,10 +2,13 @@ package net.nick.tutorialmod.block.custom;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -67,6 +70,17 @@ public class PedestalBlock extends BaseEntityBlock {
     protected ItemInteractionResult useItemOn(ItemStack pStack, BlockState pState, Level pLevel, BlockPos pPos,
                                               Player pPlayer, InteractionHand pHand, BlockHitResult pHitResult) {
         if(pLevel.getBlockEntity(pPos) instanceof PedestalBlockEntity pedestalBlockEntity) {
+            if(pPlayer.isCrouching() && !pLevel.isClientSide()) {
+                // Opens the gui menu on your screen
+                ((ServerPlayer) pPlayer).openMenu(new SimpleMenuProvider(pedestalBlockEntity, Component.literal("Pedestal")), pPos);
+                return ItemInteractionResult.SUCCESS;
+            }
+
+            // Just so the other sound doesn't play
+            if(pPlayer.isCrouching() && pLevel.isClientSide()) {
+                return ItemInteractionResult.SUCCESS;
+            }
+
             if(pedestalBlockEntity.inventory.getStackInSlot(0).isEmpty() && !pStack.isEmpty()) { // The pedestal is empty and we right clicked with an item
                 pedestalBlockEntity.inventory.insertItem(0, pStack.copy(), false); // Insert the item into the block
                 pStack.shrink(1); // Remove 1 of the item from our inventory

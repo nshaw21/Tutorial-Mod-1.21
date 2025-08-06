@@ -1,6 +1,7 @@
 package net.nick.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -23,6 +24,8 @@ import net.nick.tutorialmod.command.player.HomeCommand;
 import net.nick.tutorialmod.command.player.SetHomeCommand;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
 import net.nick.tutorialmod.item.ModItems;
+import net.nick.tutorialmod.screen.ModMenuTypes;
+import net.nick.tutorialmod.screen.custom.PedestalScreen;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -45,6 +48,8 @@ public class TutorialMod {
         ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
+
+        ModMenuTypes.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -83,7 +88,7 @@ public class TutorialMod {
     public static class ClientModEvents {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
-
+            MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
         }
 
         @SubscribeEvent

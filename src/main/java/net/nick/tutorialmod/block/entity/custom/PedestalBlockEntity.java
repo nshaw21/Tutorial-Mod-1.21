@@ -3,20 +3,26 @@ package net.nick.tutorialmod.block.entity.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.world.Containers;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.ItemStackHandler;
 import net.nick.tutorialmod.block.entity.ModBlockEntities;
+import net.nick.tutorialmod.screen.custom.PedestalMenu;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PedestalBlockEntity extends BlockEntity {
+public class PedestalBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         protected int getStackLimit(int slot, @NotNull ItemStack stack) {
@@ -75,6 +81,16 @@ public class PedestalBlockEntity extends BlockEntity {
         inventory.deserializeNBT(pRegistries, pTag.getCompound("inventory"));
     }
 
+    @Override
+    public Component getDisplayName() {
+        return Component.literal("Pedestal");
+    }
+
+    @Override
+    public @Nullable AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
+        return new PedestalMenu(pContainerId, pPlayerInventory, this);
+    }
+
     // Packet and CompoundTag are needed for every new block you make
     @Nullable
     @Override
@@ -86,7 +102,4 @@ public class PedestalBlockEntity extends BlockEntity {
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
     }
-
-
-
 }
