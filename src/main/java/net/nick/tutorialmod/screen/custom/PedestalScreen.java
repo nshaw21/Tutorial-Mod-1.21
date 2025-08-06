@@ -29,4 +29,11 @@ public class PedestalScreen extends AbstractContainerScreen<PedestalMenu> {
         // Draws the gui
         pGuiGraphics.blit(GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
     }
+
+    // Adds the name of the items when in the GUI
+    @Override
+    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
+        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        renderTooltip(pGuiGraphics, pMouseX, pMouseY);
+    }
 }
