@@ -28,6 +28,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.ENDER_COMPASS.get());
                         output.accept(ModItems.TIME_FREEZING_CLOCK.get());
                         output.accept(ModItems.POCKET_ANVIL.get());
+                        output.accept(ModItems.RING_OF_FLIGHT.get());
                         output.accept(ModItems.SPELLBOOK.get());
 
                         // Food

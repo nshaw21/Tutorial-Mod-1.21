@@ -36,6 +36,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.ENDER_COMPASS.get());
         basicItem(ModItems.TIME_FREEZING_CLOCK.get());
         basicItem(ModItems.POCKET_ANVIL.get());
+        basicItem(ModItems.RING_OF_FLIGHT.get());
         basicItem(ModItems.SPELLBOOK.get());
 
         handheldItem(ModItems.SCORCHED_BLADE.get());

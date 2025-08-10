@@ -47,6 +47,8 @@ public class ModItems {
             () -> new TimeFreezingClockItem(new Item.Properties()));
     public static final RegistryObject<Item> POCKET_ANVIL = ITEMS.register("pocket_anvil",
             () -> new PocketAnvilItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> RING_OF_FLIGHT = ITEMS.register("ring_of_flight",
+            () -> new RingOfFlightItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SPELLBOOK = ITEMS.register("spellbook",
             () -> new SpellbookItem(new Item.Properties().stacksTo(1)));
 
