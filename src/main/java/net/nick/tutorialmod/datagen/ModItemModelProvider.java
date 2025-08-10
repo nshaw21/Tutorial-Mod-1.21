@@ -38,8 +38,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         basicItem(ModItems.POCKET_ANVIL.get());
         basicItem(ModItems.RING_OF_FLIGHT.get());
         basicItem(ModItems.SPELLBOOK.get());
+        basicItem(ModItems.VOID_WALKER.get());
 
         handheldItem(ModItems.SCORCHED_BLADE.get());
+        handheldItem(ModItems.SOUL_HARVESTER.get());
 
 
 

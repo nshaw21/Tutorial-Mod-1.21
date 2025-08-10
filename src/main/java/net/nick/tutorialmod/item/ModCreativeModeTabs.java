@@ -30,6 +30,8 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.POCKET_ANVIL.get());
                         output.accept(ModItems.RING_OF_FLIGHT.get());
                         output.accept(ModItems.SPELLBOOK.get());
+                        output.accept(ModItems.VOID_WALKER.get());
+                        output.accept(ModItems.SOUL_HARVESTER.get());
 
                         // Food
                         output.accept(ModItems.KOHLRABI.get());

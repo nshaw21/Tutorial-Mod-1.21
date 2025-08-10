@@ -51,6 +51,11 @@ public class ModItems {
             () -> new RingOfFlightItem(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> SPELLBOOK = ITEMS.register("spellbook",
             () -> new SpellbookItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> VOID_WALKER = ITEMS.register("void_walker",
+            () -> new VoidWalkerItem(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> SOUL_HARVESTER = ITEMS.register("soul_harvester",
+            () -> new SoulHarvesterItem(new Item.Properties().attributes(SwordItem.createAttributes(
+                    Tiers.DIAMOND,3,-2.4f)).stacksTo(1)));
 
 
 

@@ -20,7 +20,6 @@ public class ScorchedBladeItem extends SwordItem {
         if (!player.level().isClientSide) {
             entity.igniteForTicks(50); // sets the entity on fire
         }
-
         return super.onLeftClickEntity(stack, player, entity);
     }
 
@@ -28,6 +27,7 @@ public class ScorchedBladeItem extends SwordItem {
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         level.addParticle(ParticleTypes.FLAME, player.getX() + 1, player.getY() + 1.5, player.getZ() + 0.4,
                 -1,0,0);
+
 
 
         return InteractionResultHolder.success(player.getItemInHand(hand));
