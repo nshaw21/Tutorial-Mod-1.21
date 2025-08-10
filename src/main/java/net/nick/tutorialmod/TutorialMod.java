@@ -20,13 +20,13 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.nick.tutorialmod.block.ModBlocks;
 import net.nick.tutorialmod.block.entity.ModBlockEntities;
 import net.nick.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
-import net.nick.tutorialmod.command.player.HomeCommand;
-import net.nick.tutorialmod.command.player.SetHomeCommand;
 import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
 import net.nick.tutorialmod.item.ModItems;
+import net.nick.tutorialmod.network.ModNetworking;
 import net.nick.tutorialmod.screen.ModMenuTypes;
 import net.nick.tutorialmod.screen.custom.PedestalScreen;
+import net.nick.tutorialmod.screen.custom.SpellbookScreen;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -52,6 +52,7 @@ public class TutorialMod {
 
         ModMenuTypes.register(modEventBus);
         SpellbookDataComponents.register();
+        ModNetworking.register();
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -91,6 +92,7 @@ public class TutorialMod {
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
+            MenuScreens.register(ModMenuTypes.SPELLBOOK_MENU.get(), SpellbookScreen::new);
         }
 
         @SubscribeEvent

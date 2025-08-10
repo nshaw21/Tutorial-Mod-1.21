@@ -1,22 +1,32 @@
 package net.nick.tutorialmod.screen.custom;
 
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.extensions.IForgeMenuType;
+import net.nick.tutorialmod.screen.ModMenuTypes;
 
 public class SpellbookMenu extends AbstractContainerMenu {
-    public static final MenuType<SpellbookMenu> TYPE = IForgeMenuType.create(((windowId, inv, data) ->
-            new SpellbookMenu(windowId, inv.player)));
+    private final ItemStack stack;
 
-    public SpellbookMenu(int id, Player player) {
-        super(TYPE, id);
+    // Constructor for MenuProvider (with ItemStack)
+    public SpellbookMenu(int id, Inventory inv, ItemStack stack) {
+        super(ModMenuTypes.SPELLBOOK_MENU.get(), id);
+        this.stack = stack;
+    }
+
+    // Constructor for MenuType registration (without ItemStack)
+    public SpellbookMenu(int id, Inventory inv) {
+        this(id, inv, ItemStack.EMPTY); // Default to empty stack, will be set by MenuProvider
+    }
+
+    public ItemStack getStack() {
+        return stack;
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int pIndex) {
-        return null;
+    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
+        return ItemStack.EMPTY;
     }
 
     @Override

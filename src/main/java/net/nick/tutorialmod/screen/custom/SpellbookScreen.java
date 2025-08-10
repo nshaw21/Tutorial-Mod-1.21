@@ -2,61 +2,81 @@ package net.nick.tutorialmod.screen.custom;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
-import net.nick.tutorialmod.TutorialMod;
+import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
+import net.nick.tutorialmod.network.ModNetworking;
+import net.nick.tutorialmod.network.SpellSelectionPacket;
 
-public class SpellbookScreen extends Screen {
-    protected int imageWidth = 176;
-    protected int imageHeight = 166;
-    protected int leftPos;
-    protected int topPos;
+import java.util.List;
 
-    private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath(TutorialMod.MOD_ID, "textures/gui/spellbook/spellbook_gui.png");
+public class SpellbookScreen extends AbstractContainerScreen<SpellbookMenu> {
+//    private static final ResourceLocation TEXTURE =
+//            ResourceLocation.fromNamespaceAndPath(TutorialMod.MOD_ID, "textures/gui/spellbook/spellbook_gui.png");
+    private static final List<String> SPELLS = List.of("fireball", "smite", "teleport");
 
-    public SpellbookScreen(ItemStack pTitle) {
-        super(Component.literal("Spellbook"));
+    public SpellbookScreen(SpellbookMenu menu, Inventory inv, Component title) {
+        super(menu, inv, title);
+        imageWidth = 176;
+        imageHeight = 166;
     }
 
     @Override
     protected void init() {
         super.init();
+        int buttonY = this.topPos + 20;
+        int buttonX = this.leftPos + 10;
 
-        leftPos = (this.width - imageWidth) /2;
-        topPos = (this.height - imageHeight) /2;
+        for (String spell : SPELLS) { // For each spell
+            addRenderableWidget( // Add a button for it
+                    Button.builder(Component.literal(spell), pButton -> { // Make the buttons name the spells
+                                // FIXED: Send packet to server to sync spell selection
+                                if (minecraft != null && minecraft.player != null) {
+                                    // Send network packet to server
+                                    ModNetworking.sendToServer(new SpellSelectionPacket(spell));
 
-        // Add spell buttons here
-        this.addRenderableWidget(Button.builder(Component.literal("Fireball Spell"), pButton -> {
-            // Trigger fireball spell logic
-            sendSelectedSpell("fireball");
-            this.minecraft.setScreen(null); // Close screen
-        }).bounds(leftPos + 10, topPos + 20, 120,20).build());
+                                    // Set on client side for immediate feedback
+                                    ItemStack playerStack = minecraft.player.getMainHandItem();
+                                    if (!playerStack.isEmpty()) {
+                                        playerStack.set(SpellbookDataComponents.SELECTED_SPELL.get(), spell);
+                                    }
 
-        this.addRenderableWidget(Button.builder(Component.literal("Teleport Spell"), pButton -> {
-            sendSelectedSpell("teleport");
-            this.minecraft.setScreen(null); // Close screen
-        }).bounds(leftPos + 10, topPos + 50, 120,20).build());
+                                    minecraft.player.displayClientMessage(Component.literal("Client: Selected spell: " + spell), true);
+                                }
+                                this.minecraft.player.closeContainer(); // Close the GUI when clicking the button
+                            })
+                            .pos(buttonX, buttonY) // Where to put the buttons
+                            .size(120,20) // Button sizes
+                            .build() // Builds the buttons
+            );
+            buttonY += 24; // Adds space in between each button
+        }
     }
 
-    private void sendSelectedSpell(String spellId) {
-        // Custom packet you'll create in step 3
+    @Override
+    protected void renderBg(GuiGraphics pGuiGraphics, float pPartialTick, int pMouseX, int pMouseY) {
+//        RenderSystem.setShaderTexture(0, TEXTURE);
+//        pGuiGraphics.blit(TEXTURE, leftPos, topPos,0,0, imageWidth, imageHeight);
+    }
+
+    @Override
+    protected void renderLabels(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY) {
+        pGuiGraphics.drawString(font, title, 10,10,0x404040, false);
+
+        // Show current selected spell
+        if (menu.getStack() != ItemStack.EMPTY) {
+            String currentSpell = menu.getStack().get(SpellbookDataComponents.SELECTED_SPELL.get());
+            if (currentSpell != null && !currentSpell.isEmpty()) {
+                pGuiGraphics.drawString(font, "Current: " + currentSpell, 10, 140, 0x404040, false);
+            }
+        }
     }
 
     @Override
     public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        renderBackground(pGuiGraphics);
-        pGuiGraphics.blit(TEXTURE, leftPos, topPos,0,0, imageWidth, imageHeight);
         super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
-    }
-
-    private void renderBackground(GuiGraphics pGuiGraphics) {
-    }
-
-    @Override
-    public boolean isPauseScreen() {
-        return false;
+        renderTooltip(pGuiGraphics, pMouseX, pMouseY);
     }
 }

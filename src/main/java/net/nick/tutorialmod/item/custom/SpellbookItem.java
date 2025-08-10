@@ -5,6 +5,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
@@ -13,7 +14,9 @@ import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
+import net.nick.tutorialmod.screen.custom.SpellbookMenuProvider;
 
 import java.util.List;
 
@@ -30,22 +33,21 @@ public class SpellbookItem extends Item {
 
         if (player.isShiftKeyDown()) {
             if (!level.isClientSide && player instanceof ServerPlayer serverPlayer) {
-                String currentSpell = stack.get(SpellbookDataComponents.SELECTED_SPELL.get());
-                if (currentSpell == null) currentSpell = "fireball";
-
-                String nextSpell = getNextSpell(currentSpell);
-                stack.set(SpellbookDataComponents.SELECTED_SPELL.get(), nextSpell);
-
-                // Displays it right above hot-bar
-                player.displayClientMessage(Component.literal("Selected spell: " + nextSpell), true);
+//                 Open the GUI instead of changing the spell
+//                serverPlayer.openMenu(new SimpleMenuProvider(
+//                        (pContainerId, pPlayerInventory, pPlayer) -> new SpellbookMenu(pContainerId, pPlayerInventory),
+//                        Component.literal("Spellbook")
+//                ));
+                serverPlayer.openMenu(new SpellbookMenuProvider(stack));
             }
             return InteractionResultHolder.sidedSuccess(stack, level.isClientSide);
         } else {
+            // Cast the selected spell
             if (!level.isClientSide) {
                 String spell = stack.get(SpellbookDataComponents.SELECTED_SPELL.get());
-                if (spell == null || spell.isEmpty()) {
-                    spell = "fireball";
-                    stack.set(SpellbookDataComponents.SELECTED_SPELL.get(), spell);
+                if (spell == null || spell.isEmpty()) { // If the spell is null | there is no spell loaded
+                    spell = "fireball"; // Auto set it to fireball spell
+                    stack.set(SpellbookDataComponents.SELECTED_SPELL.get(), spell); // Load the spell
                 }
                 castSpell(spell, player, level);
             }
@@ -77,6 +79,7 @@ public class SpellbookItem extends Item {
                 fireball.setOwner(player); // In case I want to do damage tracking
 
                 level.addFreshEntity(fireball);
+                return;
             }
             case "smite" -> {
                 var hitResult = player.pick(50.0D, 0.0F, false); // 50 block range | Ray trace to see where player is looking | false, ignoring fluids (water / lava)
@@ -90,9 +93,33 @@ public class SpellbookItem extends Item {
                         serverLevel.addFreshEntity(lightning); // Spawns the lightning into the world
                     }
                 }
+                return;
             }
-            case "teleport" ->
-                player.teleportTo(player.getX(), player.getY() + 10, player.getZ());
+            case "teleport" -> {
+                double maxRange = 20.0; // Max range for tp
+
+                var lookVec = player.getLookAngle(); // Get where the player is looking
+
+                // Ray trace to see if something is in the way
+                var hitResult = player.pick(maxRange,0.0f, false);
+
+                var teleportPos = switch (hitResult.getType()) {
+                    case BLOCK, ENTITY -> {
+                        //Hit something, teleport slightly before the hit position
+                        var hit = hitResult.getLocation();
+                        var backOff = lookVec.normalize().scale(1.0); // 1 block before
+                        yield hit.subtract(backOff);
+                    }
+                    case MISS -> {
+                        var targetX = player.getX() + lookVec.x * maxRange;
+                        var targetY = player.getY() + lookVec.y * maxRange;
+                        var targetZ = player.getZ() + lookVec.z * maxRange;
+                        yield new Vec3(targetX, targetY, targetZ);
+                    }
+                };
+                player.teleportTo(teleportPos.x, teleportPos.y, teleportPos.z);
+                return;
+            }
 
             default -> player.displayClientMessage(Component.literal("No spell selected."), true);
         }
