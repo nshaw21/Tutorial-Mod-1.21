@@ -91,6 +91,9 @@ public class SoulHarvesterItem extends Item {
         }
     }
 
+    // Add damage for every 50 souls
+    
+
     private static int getSoulCount(ItemStack stack) {
         var customData = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY);
         return customData.copyTag().getInt("souls");

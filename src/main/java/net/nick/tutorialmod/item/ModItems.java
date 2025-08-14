@@ -56,6 +56,8 @@ public class ModItems {
     public static final RegistryObject<Item> SOUL_HARVESTER = ITEMS.register("soul_harvester",
             () -> new SoulHarvesterItem(new Item.Properties().attributes(SwordItem.createAttributes(
                     Tiers.DIAMOND,3,-2.4f)).stacksTo(1)));
+    public static final RegistryObject<Item> KUSARIGAMA = ITEMS.register("kusarigama",
+            () -> new KusarigamaItem(new Item.Properties()));
 
 
 

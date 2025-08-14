@@ -9,6 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+import net.nick.tutorialmod.entity.custom.ScorchedProjectileEntity;
 
 public class ScorchedBladeItem extends SwordItem {
     public ScorchedBladeItem(Tier pTier, Properties pProperties) {
@@ -25,10 +27,20 @@ public class ScorchedBladeItem extends SwordItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-        level.addParticle(ParticleTypes.FLAME, player.getX() + 1, player.getY() + 1.5, player.getZ() + 0.4,
-                -1,0,0);
+        ScorchedProjectileEntity scorchedProjectile = new ScorchedProjectileEntity(player, level);
 
+        // Set arrow position
+        scorchedProjectile.setPos(
+        player.getX() + player.getLookAngle().x * 1.5,
+        player.getEyeY() + player.getLookAngle().y * 1.5,
+        player.getZ() + player.getLookAngle().z * 1.5
+        );
 
+        // Move the projectile
+        scorchedProjectile.setDeltaMovement(player.getLookAngle().scale(2.0f));
+
+        // Adds it in the game
+        level.addFreshEntity(scorchedProjectile);
 
         return InteractionResultHolder.success(player.getItemInHand(hand));
     }

@@ -42,6 +42,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 
         handheldItem(ModItems.SCORCHED_BLADE.get());
         handheldItem(ModItems.SOUL_HARVESTER.get());
+        handheldItem(ModItems.KUSARIGAMA.get());
 
 
 

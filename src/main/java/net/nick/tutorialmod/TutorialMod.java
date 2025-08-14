@@ -2,6 +2,7 @@ package net.nick.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -21,6 +22,9 @@ import net.nick.tutorialmod.block.ModBlocks;
 import net.nick.tutorialmod.block.entity.ModBlockEntities;
 import net.nick.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
 import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
+import net.nick.tutorialmod.entity.ModEntityTypes;
+import net.nick.tutorialmod.entity.renderer.KusarigamaRenderer;
+import net.nick.tutorialmod.entity.renderer.ScorchedProjectileRenderer;
 import net.nick.tutorialmod.item.ModCreativeModeTabs;
 import net.nick.tutorialmod.item.ModItems;
 import net.nick.tutorialmod.network.ModNetworking;
@@ -49,10 +53,12 @@ public class TutorialMod {
         ModBlocks.register(modEventBus);
 
         ModBlockEntities.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         ModMenuTypes.register(modEventBus);
-        SpellbookDataComponents.register();
         ModNetworking.register();
+
+        SpellbookDataComponents.register();
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -93,6 +99,8 @@ public class TutorialMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
             MenuScreens.register(ModMenuTypes.SPELLBOOK_MENU.get(), SpellbookScreen::new);
+            EntityRenderers.register(ModEntityTypes.KUSARIGAMA.get(), KusarigamaRenderer::new);
+            EntityRenderers.register(ModEntityTypes.SCORCHED_PROJECTILE.get(), ScorchedProjectileRenderer::new);
         }
 
         @SubscribeEvent
