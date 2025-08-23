@@ -22,6 +22,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         blockWithItem(ModBlocks.ALEXANDRITE_DEEPSLATE_ORE);
 
         blockWithItem(ModBlocks.MAGIC_BLOCK);
+        blockWithItem(ModBlocks.POCKET_DIMENSION_BLOCK);
     }
 
     // Helper method for cubeAll blocks (same image on each side)

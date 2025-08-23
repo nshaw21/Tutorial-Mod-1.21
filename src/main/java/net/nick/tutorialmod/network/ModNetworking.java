@@ -1,5 +1,3 @@
-// Create this file: src/main/java/net/nick/tutorialmod/network/ModNetworking.java
-
 package net.nick.tutorialmod.network;
 
 import net.minecraft.network.chat.Component;
