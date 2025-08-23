@@ -15,6 +15,7 @@ import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.block.custom.MagicBlock;
 import net.nick.tutorialmod.block.custom.PedestalBlock;
 import net.nick.tutorialmod.block.custom.PocketPortalBlock;
+import net.nick.tutorialmod.block.custom.PocketWallBlock;
 import net.nick.tutorialmod.item.ModItems;
 
 import java.util.function.Supplier;
@@ -48,6 +49,12 @@ public class ModBlocks {
 
     public static final RegistryObject<Block> POCKET_DIMENSION_BLOCK = registerBlock("pocket_dimension_block",
             () -> new PocketPortalBlock(BlockBehaviour.Properties.of().noOcclusion().noLootTable()));
+
+    public static final RegistryObject<Block> POCKET_WALL_BLOCK = registerBlock("pocket_wall_block",
+            () -> new PocketWallBlock(BlockBehaviour.Properties.of()
+                    .strength(-1.0f, 3600000.0f) // Unbreakable like bedrock
+                    .noLootTable() // Don't drop anything when broken
+                    .sound(SoundType.STONE))); // White stone sound
 
 
 

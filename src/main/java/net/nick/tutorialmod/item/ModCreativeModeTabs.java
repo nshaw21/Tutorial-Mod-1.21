@@ -53,6 +53,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModBlocks.MAGIC_BLOCK.get());
                         output.accept(ModBlocks.PEDESTAL.get());
                         output.accept(ModBlocks.POCKET_DIMENSION_BLOCK.get());
+                        output.accept(ModBlocks.POCKET_WALL_BLOCK.get());
 
                     }).build());
 

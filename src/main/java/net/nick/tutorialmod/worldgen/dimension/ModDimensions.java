@@ -1,7 +1,5 @@
 package net.nick.tutorialmod.worldgen.dimension;
 
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -18,7 +16,6 @@ import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import net.minecraft.world.level.levelgen.NoiseGeneratorSettings;
 import net.nick.tutorialmod.TutorialMod;
 
-import java.util.List;
 import java.util.OptionalLong;
 
 public class ModDimensions {
@@ -56,20 +53,13 @@ public class ModDimensions {
         HolderGetter<DimensionType> dimTypes = context.lookup(Registries.DIMENSION_TYPE);
         HolderGetter<NoiseGeneratorSettings> noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
-        // Uses all these biomes in the dimension
-        NoiseBasedChunkGenerator noiseBasedChunkGenerator = new NoiseBasedChunkGenerator(
-                MultiNoiseBiomeSource.createFromList(
-                        new Climate.ParameterList<>(List.of(Pair.of(
-                                    Climate.parameters(0.1F, 0.2F, 0.0F, 0.2F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.BIRCH_FOREST)),
-                            Pair.of(
-                                    Climate.parameters(0.3F, 0.6F, 0.1F, 0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.OCEAN)),
-                            Pair.of(
-                                    Climate.parameters(0.4F, 0.3F, 0.2F, 0.1F, 0.0F, 0.0F, 0.0F), biomeRegistry.getOrThrow(Biomes.DARK_FOREST))
+        // Create a void world using NoiseBasedChunkGenerator with void biome
+        NoiseBasedChunkGenerator voidChunkGenerator = new NoiseBasedChunkGenerator(
+                new FixedBiomeSource(biomeRegistry.getOrThrow(Biomes.THE_VOID)), // Only void biome
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.END) // Use end settings (more void-like)
+        );
 
-                        ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
-
-        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.POCKET_DIM_TYPE), noiseBasedChunkGenerator);
+        LevelStem stem = new LevelStem(dimTypes.getOrThrow(ModDimensions.POCKET_DIM_TYPE), voidChunkGenerator);
 
         context.register(POCKET_KEY, stem);
     }
