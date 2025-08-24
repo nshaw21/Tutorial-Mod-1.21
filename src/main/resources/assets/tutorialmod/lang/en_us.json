@@ -13,6 +13,7 @@
   "item.tutorialmod.void_walker": "Void Walker",
   "item.tutorialmod.soul_harvester": "Soul Harvester",
   "item.tutorialmod.kusarigama": "Kusarigama",
+  "item.tutorialmod.summoning_staff": "Summoning Staff",
 
   "block.tutorialmod.alexandrite_block": "Block of Alexandrite",
   "block.tutorialmod.raw_alexandrite_block": "Block of Raw Alexandrite",
@@ -23,6 +24,8 @@
   "block.tutorialmod.pedestal": "Pedestal",
   "block.tutorialmod.pocket_dimension_block": "Pocket Dimension Block",
   "block.tutorialmod.pocket_wall_block": "Pocket Wall Block",
+
+  "effect.tutorialmod.slimey": "Slimey",
 
   "creativetab.tutorialmod.alexandrite_items": "Alexandrite Items",
   "creativetab.tutorialmod.alexandrite_blocks": "Alexandrite Blocks",

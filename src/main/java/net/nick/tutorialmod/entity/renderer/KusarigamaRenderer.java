@@ -19,7 +19,7 @@ import org.joml.Matrix4f;
 
 public class KusarigamaRenderer extends EntityRenderer<KusarigamaEntity> {
     private static final ResourceLocation KUSARIGAMA_TEXTURE = ResourceLocation.fromNamespaceAndPath(TutorialMod.MOD_ID, "textures/entity/kusarigama.png");
-    private static final RenderType KUSARIGAMA_RENDER_TYPE = RenderType.entityCutout(KUSARIGAMA_TEXTURE);
+    private static final RenderType KUSARIGAMA_RENDER_TYPE = RenderType.leash();
 
     public KusarigamaRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -85,26 +85,26 @@ public class KusarigamaRenderer extends EntityRenderer<KusarigamaEntity> {
         float width = 0.03f;
 
         // Front face
-        consumer.addVertex(pose, -width, -width, z1).setColor(64, 64, 64, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, width, -width, z1).setColor(64, 64, 64, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, width, width, z1).setColor(64, 64, 64, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, -width, width, z1).setColor(64, 64, 64, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY);
+        consumer.addVertex(pose, -width, -width, z1).setColor(64, 64, 64, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, 1);
+        consumer.addVertex(pose, width, -width, z1).setColor(64, 64, 64, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, 1);
+        consumer.addVertex(pose, width, width, z1).setColor(64, 64, 64, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, 1);
+        consumer.addVertex(pose, -width, width, z1).setColor(64, 64, 64, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, 1);
 
         // Back face
-        consumer.addVertex(pose, -width, width, z2).setColor(64, 64, 64, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, width, width, z2).setColor(64, 64, 64, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, width, -width, z2).setColor(64, 64, 64, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, -width, -width, z2).setColor(64, 64, 64, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY);
+        consumer.addVertex(pose, -width, width, z2).setColor(64, 64, 64, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, width, width, z2).setColor(64, 64, 64, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, width, -width, z2).setColor(64, 64, 64, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, -width, -width, z2).setColor(64, 64, 64, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
     }
 
     private void drawWhipHead(VertexConsumer consumer, Matrix4f pose, Matrix3f normal, int light) {
         float size = 1.0f;
 
-        // Simple cube for whip head - just front and back faces for simplicity
-        consumer.addVertex(pose, -size, -size, -size).setColor(96, 64, 32, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, size, -size, -size).setColor(96, 64, 32, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, size, size, -size).setColor(96, 64, 32, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY);
-        consumer.addVertex(pose, -size, size, -size).setColor(96, 64, 32, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY);
+        // Simple cube for whip head - just front face for simplicity
+        consumer.addVertex(pose, -size, -size, -size).setColor(96, 64, 32, 255).setUv(0, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, size, -size, -size).setColor(96, 64, 32, 255).setUv(1, 0).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, size, size, -size).setColor(96, 64, 32, 255).setUv(1, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
+        consumer.addVertex(pose, -size, size, -size).setColor(96, 64, 32, 255).setUv(0, 1).setOverlay(OverlayTexture.NO_OVERLAY).setLight(light).setNormal(0, 0, -1);
     }
 
     @Override

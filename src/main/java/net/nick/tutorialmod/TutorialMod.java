@@ -22,6 +22,8 @@ import net.nick.tutorialmod.block.ModBlocks;
 import net.nick.tutorialmod.block.entity.ModBlockEntities;
 import net.nick.tutorialmod.block.entity.renderer.PedestalBlockEntityRenderer;
 import net.nick.tutorialmod.datacomponent.SpellbookDataComponents;
+import net.nick.tutorialmod.datacomponent.SummoningStaffDataComponents;
+import net.nick.tutorialmod.effect.ModEffects;
 import net.nick.tutorialmod.entity.ModEntityTypes;
 import net.nick.tutorialmod.entity.renderer.KusarigamaRenderer;
 import net.nick.tutorialmod.entity.renderer.ScorchedProjectileRenderer;
@@ -31,6 +33,7 @@ import net.nick.tutorialmod.network.ModNetworking;
 import net.nick.tutorialmod.screen.ModMenuTypes;
 import net.nick.tutorialmod.screen.custom.PedestalScreen;
 import net.nick.tutorialmod.screen.custom.SpellbookScreen;
+import net.nick.tutorialmod.screen.custom.SummoningStaffScreen;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -52,6 +55,8 @@ public class TutorialMod {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
+        ModEffects.register(modEventBus);
+
         ModBlockEntities.register(modEventBus);
         ModEntityTypes.register(modEventBus);
 
@@ -59,6 +64,7 @@ public class TutorialMod {
         ModNetworking.register();
 
         SpellbookDataComponents.register();
+        SummoningStaffDataComponents.register(modEventBus);
 
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
@@ -99,6 +105,7 @@ public class TutorialMod {
         public static void onClientSetup(FMLClientSetupEvent event) {
             MenuScreens.register(ModMenuTypes.PEDESTAL_MENU.get(), PedestalScreen::new);
             MenuScreens.register(ModMenuTypes.SPELLBOOK_MENU.get(), SpellbookScreen::new);
+            MenuScreens.register(ModMenuTypes.SUMMONING_STAFF_MENU.get(), SummoningStaffScreen::new);
             EntityRenderers.register(ModEntityTypes.KUSARIGAMA.get(), KusarigamaRenderer::new);
             EntityRenderers.register(ModEntityTypes.SCORCHED_PROJECTILE.get(), ScorchedProjectileRenderer::new);
         }

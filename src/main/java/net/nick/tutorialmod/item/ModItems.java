@@ -58,6 +58,8 @@ public class ModItems {
                     Tiers.DIAMOND,3,-2.4f)).stacksTo(1)));
     public static final RegistryObject<Item> KUSARIGAMA = ITEMS.register("kusarigama",
             () -> new KusarigamaItem(new Item.Properties()));
+    public static final RegistryObject<Item> SUMMONING_STAFF = ITEMS.register("summoning_staff",
+            () -> new SummoningStaffItem(new Item.Properties().stacksTo(1)));
 
 
 

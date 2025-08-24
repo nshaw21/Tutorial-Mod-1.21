@@ -5,8 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
@@ -21,7 +19,7 @@ import net.nick.tutorialmod.screen.custom.SpellbookMenuProvider;
 import java.util.List;
 
 public class SpellbookItem extends Item {
-    private static final List<String> SPELLS = List.of("fireball", "smite", "teleport");
+    private static final List<String> SPELLS = List.of("fireball", "smite", "teleport", "infinity");
 
     public SpellbookItem(Properties pProperties) {
         super(pProperties);
@@ -119,6 +117,14 @@ public class SpellbookItem extends Item {
                 };
                 player.teleportTo(teleportPos.x, teleportPos.y, teleportPos.z);
                 return;
+            }
+            case "infinity" -> {
+                int infinityTimer = 200; // Activate the ability for 10 seconds
+
+                // Add custom infinity effect
+//                if (player instanceof ServerPlayer serverPlayer) {
+//                    applyInfinityEffect(serverPlayer, infinityTimer);
+//                }
             }
 
             default -> player.displayClientMessage(Component.literal("No spell selected."), true);

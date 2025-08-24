@@ -33,6 +33,7 @@ public class ModCreativeModeTabs {
                         output.accept(ModItems.VOID_WALKER.get());
                         output.accept(ModItems.SOUL_HARVESTER.get());
                         output.accept(ModItems.KUSARIGAMA.get());
+                        output.accept(ModItems.SUMMONING_STAFF.get());
 
                         // Food
                         output.accept(ModItems.KOHLRABI.get());

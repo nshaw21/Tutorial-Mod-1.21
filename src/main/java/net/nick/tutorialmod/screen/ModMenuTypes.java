@@ -9,6 +9,7 @@ import net.minecraftforge.registries.RegistryObject;
 import net.nick.tutorialmod.TutorialMod;
 import net.nick.tutorialmod.screen.custom.PedestalMenu;
 import net.nick.tutorialmod.screen.custom.SpellbookMenu;
+import net.nick.tutorialmod.screen.custom.SummoningStaffMenu;
 
 public class ModMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
@@ -24,6 +25,13 @@ public class ModMenuTypes {
                         // We don't need the data parameter since ItemStack comes through MenuProvider
                         // This will be handled in SpellbookMenuProvider.createMenu()
                         return new SpellbookMenu(windowId, inv, inv.player.getMainHandItem());
+                    }
+            ));
+
+    public static final RegistryObject<MenuType<SummoningStaffMenu>> SUMMONING_STAFF_MENU =
+            MENUS.register("summoning_staff_menu", () -> IForgeMenuType.create(
+                    (windowId, inv, data) -> {
+                        return new SummoningStaffMenu(windowId, inv, inv.player.getMainHandItem());
                     }
             ));
 

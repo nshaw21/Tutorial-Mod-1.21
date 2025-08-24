@@ -45,7 +45,7 @@ public class KusarigamaEntity extends AbstractArrow {
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
         super.defineSynchedData(pBuilder);
-        this.entityData.set(RETURNING, false);
+        pBuilder.define(RETURNING, false);
     }
 
     @Override
@@ -81,9 +81,9 @@ public class KusarigamaEntity extends AbstractArrow {
             // Move towards owner
             this.setDeltaMovement(direction.scale(1.5));
 
-            // Pull hit entity along i we have one
+            // Pull hit entity along if we have one
             if (hitTarget != null && hitTarget.isAlive() && hitTarget instanceof LivingEntity living) {
-                Vec3 pullDirection = ownerPos.subtract(hitTarget.position().normalize());
+                Vec3 pullDirection = ownerPos.subtract(hitTarget.position()).normalize();
                 Vec3 pullVelocity = pullDirection.scale(PULL_FORCE);
 
                 // Don't pull bosses or players in creative/spectator
