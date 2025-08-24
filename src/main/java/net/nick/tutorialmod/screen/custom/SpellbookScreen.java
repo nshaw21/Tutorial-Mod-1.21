@@ -15,7 +15,7 @@ import java.util.List;
 public class SpellbookScreen extends AbstractContainerScreen<SpellbookMenu> {
 //    private static final ResourceLocation TEXTURE =
 //            ResourceLocation.fromNamespaceAndPath(TutorialMod.MOD_ID, "textures/gui/spellbook/spellbook_gui.png");
-    private static final List<String> SPELLS = List.of("fireball", "smite", "teleport");
+    private static final List<String> SPELLS = List.of("fireball", "smite", "teleport", "infinity");
 
     public SpellbookScreen(SpellbookMenu menu, Inventory inv, Component title) {
         super(menu, inv, title);
